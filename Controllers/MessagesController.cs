@@ -89,7 +89,7 @@ namespace GuestBook.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Message,CreatedDate,Id_user")] Messages messages)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Message")] Messages messages)
         {
             if (id != messages.Id)
             {
@@ -100,6 +100,9 @@ namespace GuestBook.Controllers
             {
                 try
                 {
+                    messages.CreatedDate = DateTime.Now;
+                    messages.Id_user = Convert.ToInt32(HttpContext.Session.GetString("UserID"));
+                    messages.Owner = await _repo.GetObject(messages.Id_user);
                     _repository.Update(messages);
                     await _repository.Save();
                 }
@@ -114,7 +117,7 @@ namespace GuestBook.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), messages);
             }
             return View(messages);
         }

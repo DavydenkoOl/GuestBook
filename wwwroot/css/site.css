@@ -25,7 +25,7 @@ body {
 }
 #mess {
     width: 90%;
-    height: 200px;
+    height: auto;
     background-color: #769ad7;
     border:2px solid;
     border-radius: 12px;

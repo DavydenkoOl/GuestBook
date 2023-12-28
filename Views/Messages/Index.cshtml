@@ -8,22 +8,31 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200;0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;0,6..12,900;1,6..12,200&family=Philosopher:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
 
-
+@if(Context.Session.GetString("FirstName") != null){
 <p>
-    <a asp-action="Create" >Добавить отзыв</a>
+    <a asp-action="Create">Добавить отзыв</a>
 </p>
+}
+
 <h3 style="font-style:italic">Отзывы о нас:</h3>
 
 @foreach (var item in Model) {
     <div id="mess" >
-
-        <p>
-            @Html.DisplayFor(modelItem => item.Message)
-        </p>
+        <h5> @Html.DisplayFor(modelItem => item.Owner.FirstName)  @Html.DisplayFor(modelItem => item.Owner.LastName) </h5>
+        <div style="margin-top: 20px">
+            <p>
+                @Html.DisplayFor(modelItem => item.Message)
+            </p>
+        </div>
+        
         <div>
             @Html.DisplayFor(modelItem => item.CreatedDate)
-            @Html.DisplayFor(modelItem => item.Owner.FirstName)  @Html.DisplayFor(modelItem => item.Owner.LastName)
+           
         </div>
+        @if (Context.Session.GetString("UserID") == item.Id_user.ToString())
+        {
+            <a asp-action="Edit" asp-route-id="@item.Id">Изменить</a>
+        }
     </div>
         
                @*  <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> 
