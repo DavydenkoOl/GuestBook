@@ -31,7 +31,11 @@
         </div>
         @if (Context.Session.GetString("UserID") == item.Id_user.ToString())
         {
-            <a asp-action="Edit" asp-route-id="@item.Id">Изменить</a>
+            <div style="width: 100%;display:flex; justify-content: space-between">
+
+                <a asp-action="Edit" asp-route-id="@item.Id" style="width:10%; color: #102dcd; text-decoration: none;font-size:20px;font-style:italic; font-weight:800">Изменить</a>
+                <a asp-action="Delete" asp-route-id="@item.Id" style="width:10%; color: #e93b0b; text-decoration: none;font-size:20px;font-style:italic; font-weight:800">Удалить</a>
+            </div>
         }
     </div>
         
