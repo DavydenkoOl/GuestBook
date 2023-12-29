@@ -10,7 +10,7 @@
 
 @if(Context.Session.GetString("FirstName") != null){
 <p>
-    <a asp-action="Create">Добавить отзыв</a>
+        <a asp-action="Create"  asp-controller="Account" style="width:10%; color: #102dcd; text-decoration: none;font-size:20px;font-style:italic; font-weight:800">Добавить отзыв</a>
 </p>
 }
 

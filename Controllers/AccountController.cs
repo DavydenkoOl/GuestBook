@@ -22,6 +22,10 @@ namespace GuestBook.Controllers
             HttpContext.Session.Clear();
             return View();
         }
+        public IActionResult Create()
+        {
+            return View();
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
